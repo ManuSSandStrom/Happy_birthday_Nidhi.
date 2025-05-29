@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Happy Birthday Acha 🎉</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(to bottom, #ffdee9, #b5fffc);
+      font-family: 'Segoe UI', sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      overflow-x: hidden;
+    }
+
+    .slideshow, .final {
+      width: 90%;
+      max-width: 600px;
+      text-align: center;
+      margin-top: 30px;
+    }
+
+    .image-box {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      animation: fadeIn 2s ease-in-out forwards;
+    }
+
+    .image-box img {
+      max-width: 100%;
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    }
+
+    .message {
+      margin-top: 15px;
+      font-size: 1.2em;
+      font-weight: 500;
+      color: #333;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.9); }
+      to { opacity: 1; transform: scale(1); }
+    }
+
+    .gift-container {
+      position: relative;
+      width: 150px;
+      height: 150px;
+      margin-top: 60px;
+      display: none;
+      cursor: pointer;
+      animation: fadeIn 1.5s ease-in-out forwards;
+    }
+
+    .box {
+      width: 100%;
+      height: 100%;
+      background: #ff69b4;
+      border-radius: 10px;
+      position: relative;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+      z-index: 1;
+    }
+
+    .lid {
+      position: absolute;
+      width: 100%;
+      height: 30px;
+      background: #d63384;
+      border-radius: 10px 10px 0 0;
+      top: 0;
+      left: 0;
+      transform-origin: top center;
+      z-index: 2;
+      transition: transform 1s ease;
+    }
+
+    .ribbon {
+      position: absolute;
+      width: 20px;
+      height: 100%;
+      background: #fff;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 1;
+    }
+
+    .gift-container.open .lid {
+      transform: rotateX(150deg) translateY(-20px);
+    }
+
+    .final-message {
+      margin-top: 30px;
+      font-size: 2em;
+      color: #5933d6;
+      font-weight: bold;
+      opacity: 0;
+      animation: fadeIn 2s ease-in-out 1s forwards;
+    }
+
+    .heart {
+      color: red;
+      font-size: 2em;
+      margin-top: 10px;
+      animation: pulse 1s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.3); }
+    }
+
+    @media (max-width: 600px) {
+      .message { font-size: 1em; }
+      .final-message { font-size: 1.5em; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="slideshow" id="slideshow">
+    <div class="image-box">
+      <img src="https://res.cloudinary.com/dcd6l5egh/image/upload/v1746958742/n3_s7yjwk.jpg" alt="memory 1">
+      <div class="message">Acha, from day one you’ve been my support and sunshine 🌞</div>
+    </div>
+    <div class="image-box">
+      <img src="https://res.cloudinary.com/dcd6l5egh/image/upload/v1746958742/n7_ss5xao.jpg" alt="memory 2">
+      <div class="message">Your smile lights up my darkest days ❤️</div>
+    </div>
+    <div class="image-box">
+      <img src="https://res.cloudinary.com/dcd6l5egh/image/upload/v1746958742/n4_qzyx83.jpg" alt="memory 3">
+      <div class="message">Every moment with you is a treasure. 🎁</div>
+    </div>
+    <div class="image-box">
+      <img src="https://res.cloudinary.com/dcd6l5egh/image/upload/v1746958742/n6_axthx2.jpg" alt="Together">
+      <div class="message">Me & You – partners in every silly thing, forever friends 👩‍❤️‍👨 - Manu</div>
+    </div>
+  </div>
+
+  <div class="gift-container" id="gift">
+    <div class="lid"></div>
+    <div class="box">
+      <div class="ribbon"><p>OPEN</p></div>
+    </div>
+  </div>
+
+  <div class="final" id="final" style="display: none;">
+    <div class="final-message">Happy Birthday Nidhi!</div>
+    <div class="heart">❤️</div>
+  </div>
+
+  <script>
+    const boxes = document.querySelectorAll('.image-box');
+    let current = 0;
+
+    function showNext() {
+      if (current < boxes.length) {
+        boxes[current].style.display = 'flex';
+        current++;
+        setTimeout(showNext, 3000);
+      } else {
+        setTimeout(showGift, 1000);
+      }
+    }
+
+    function showGift() {
+      const gift = document.getElementById('gift');
+      gift.style.display = 'block';
+      gift.addEventListener('click', () => {
+        gift.classList.add('open');
+        setTimeout(() => {
+          document.getElementById('final').style.display = 'block';
+        }, 1000);
+      });
+    }
+
+    window.onload = showNext;
+  </script>
+
+</body>
+</html>
